@@ -1,0 +1,102 @@
+<%- include('../includes/navBarAdmin.ejs') %>
+
+<%if(msg){%>
+  <div class="alert alert-<%if(danger){%>danger<%} else { %>success<% } %>" role="alert">
+    <%= text %>
+  </div>
+<% } %>
+
+<div class="container">
+  
+  <form id="form-horizontal" class="row" method="POST" action="/admin/postNewUser" >
+      <!-- Form Name -->
+      <legend>Agregar Nuevo Usuario</legend>
+        
+      <div class="col-md-12 col-xl-6">
+        <div class="form-group">
+          <label class="col control-label" for="rut">Rut</label>  
+          <div class="col">
+          <input id="rut" name="rut" type="text" placeholder="" class="form-control input-md" required="">
+            
+          </div>
+        </div>
+        
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col control-label" for="clave">Clave</label>
+          <div class="col">
+            <input id="clave" name="clave" type="password" placeholder="Clave Inicial" class="form-control input-md" required="">
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col control-label" for="correo">Correo</label>  
+            <div class="col">
+                <input id="correo" name="correo" type="email" placeholder="" class="form-control input-md" required="">
+            </div>
+        </div>
+    
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col control-label" for="nombre">Nombre</label>  
+          <div class="col">
+            <input id="nombre" name="nombre" type="text" placeholder="" class="form-control input-md" required="">
+          </div>
+        </div>
+      </div>
+      <!-- Text input-->
+
+      <div class="col-md-12 col-xl-6">
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col control-label" for="primerApellido">Primer Apellido</label>  
+          <div class="col">
+          <input id="primerApellido" name="primerApellido" type="text" placeholder="" class="form-control input-md">
+            
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col control-label" for="segundoApellido">Segundo Apellido</label>  
+          <div class="col">
+          <input id="segundoApellido" name="segundoApellido" type="text" placeholder="" class="form-control input-md">
+            
+          </div>
+        </div>
+        
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col control-label" for="fono">Fono</label>  
+          <div class="col">
+          <input id="fono" name="fono" type="number" placeholder="" class="form-control input-md" required="">
+            
+          </div>
+        </div>
+        
+        <!-- Button Drop Down -->
+        <div class="form-group">
+          <label class="col control-label" for="exampleFormControlSelect1">Tipo Usuario</label>
+          <div class="col">
+            <select id="tipoUsuario" name="tipoUsuario" class="form-control input-md">
+              <option>admin</option>
+              <option>user</option>
+            </select>
+          </div>
+        </div>
+        
+        <!-- Button -->
+        <div class="form-group">
+          <label class="col control-label" for="submit"></label>
+          <div class="col">
+            <button id="submit" name="submit" class="btn btn-primary">Agregar Usuario</button>
+          </div>
+        </div>
+
+      </div>
+      
+  </form>
+</div>
+
+<%- include('../includes/footerPage.ejs') %>

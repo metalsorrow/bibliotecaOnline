@@ -1,0 +1,39 @@
+<%- include('../includes/navBarUser.ejs') %>
+
+<div class="container">
+
+    <% if(prestamos.length > 0){ %>
+        <table class="table table-dark my-3">
+            <thead>
+              <tr>
+                <th scope="col"># Codigo Prestamo</th>
+                <th scope="col">Libro</th>
+                <th scope="col">Fecha Prestamo</th>
+                <th scope="col">Fecha Devolucion</th>
+                <th scope="col">Estado De Devolucion</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% prestamos.map( prestamo => { %>
+
+                    <tr>
+                        <th scope="row"><%=prestamo.prestamo.idPrestamo%></th>
+                        <td><%=prestamo.nombreLibro%></td>
+                        <td><%=prestamo.prestamo.fechaPrestamo %></td>
+                        <td><%if(prestamo.prestamo.fechaDevolucion){ %> <%=prestamo.prestamo.fechaDevolucion%> <%} else {%> Sin Fecha de Registro <% } %></td>
+                        <td><%if(prestamo.prestamo.estadoDevolucion){ %> Devuelto <%} else {%> Por Devolver <% } %></td>
+                    </tr>
+
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+    
+        <h1>No hay Reservas Registradas</h1>
+
+    <% } %>
+
+
+</div>
+
+<%- include('../includes/footerPage.ejs') %>

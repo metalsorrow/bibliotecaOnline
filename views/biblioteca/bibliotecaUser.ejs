@@ -1,0 +1,72 @@
+<%- include('../includes/navBarUser.ejs') %>
+
+<%- include('../includes/carousel.ejs') %>
+
+
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center my-5">
+    <h1 class="display-4 font-weight-bolder animated-pulse">
+      biblioteca
+    </h1>
+  </div>
+
+  <div class="row m-3">
+    <% if(libros.length > 0) {%>
+      <% libros.map( libro => { %>
+        <div class="col-12 col-lg-6  col-xl-4 my-1">
+          <div class="card">
+            <img
+              src="<%= libro.urlImg %>"
+              class="card-img-top"
+              alt="..."
+              width="200"
+              height="400"
+            />
+            <div class="card-body">
+              <h4 class="card-title">
+                <%= libro.nombreLibro %>
+              </h5>
+              <p class="card-text">
+                <!-- Edicion: <%= libro.descripcion %> -->
+              </p>
+              <p class="card-text">
+                Autor:  <%= libro.nombreAutor %>
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                  Edicion: <%= libro.annoEdicion %>
+                </small>
+              </p>
+              <form action="/biblioteca/<%=libro.idLibro%>", method="GET">
+                <button type="submit" class="btn btn-primary">Ver Detalles</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      <% }) %>
+    <%} else { %>
+      <h2>No Hay libros disponibles</h2>
+    <%} %>
+
+  </div>
+</div>
+
+
+<!-- <% if(login){%>
+  <script>
+    function fijarSesion(){
+      if(!sessionStorage){
+        sessionStorage.setItem('token', '<%- token %>')
+        console.log(sessionStorage.getItem('token'))
+        
+      }
+    }
+    window.onload = fijarSesion()
+  </script>
+
+<%}%> -->
+
+
+
+<%- include('../includes/footerPage.ejs') %>

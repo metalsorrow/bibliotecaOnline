@@ -1,0 +1,77 @@
+<%- include('../../includes/navBarUser.ejs') %>
+
+<div class="container py-5 my-4" style="background-color: whitesmoke">
+    <div class="row" style="margin: 0 auto">
+        <div class="col-12 col-md-4 ">
+            <div id="imagen" >
+                <img src="<%=libro.urlImg%>" alt="..." class="img-fluid" style="width: 100%;">
+            </div>
+        </div>
+        
+        <div class="col-12 col-md-8">
+            <div id="texto" class="p-3" style="background-color: rgb(202, 202, 202)">
+                    
+                <h2><%= libro.nombreLibro %></h2>
+        
+                <p class="text-muted">
+                    <h6>Año Edicion:</h6>
+                    <%= libro.annoEdicion %>
+                </p>
+        
+                <p class="text-muted">
+                    <h6>Autor:</h6>
+                    <%= libro.nombreAutor %>
+                </p>
+        
+                <p class="text-muted">
+                    <h6>Nombre Editorial:</h6>
+                    <%= libro.nombreEditorial %>
+                </p>
+                <!-- <p class="text-muted">
+                    <h6>Descripcion:</h6>
+                    <%= libro.descripcionLibro %>
+                </p> -->
+                <div class="d-flex justify-content-center">
+                    <form  class="mr-3" action="/biblioteca/pdf">
+                        <input type="hidden" name="idLibro" value="<%= libro.idLibro %>">
+                        <button type="submit" class="btn btn-primary">Ver Online</button>
+                    </form>
+                    <form method="POST" id="form-prestamo" action="/prestamo/<%= libro.idLibro %>">
+                        <button type="submit" class="btn btn-secondary">Reservar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script>
+    const myForm =document.getElementById('form-prestamo');
+    const token = sessionStorage.getItem('token');
+
+    console.log(token)
+
+    myForm.addEventListener('click', function(e){
+
+        const formData = new FormData(this);
+
+
+        fetch('/prestamo/<%= libro.idLibro %>',{
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then( (res) => {
+            return res.text();
+        })
+        .then( text => {
+            console.log(text);
+        })
+
+    });
+
+</script> -->
+
+<%- include('../../includes/footerPage.ejs') %>
