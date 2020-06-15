@@ -1,0 +1,58 @@
+<%- include('../includes/navBarAdmin.ejs') %>
+
+<%if(msg){%>
+    <div class="alert alert-success" role="alert">
+      <%= text %>
+    </div>
+<% } %>
+
+
+<div class="container">
+
+    <div class="row flex-row-reverse  my-3 ">
+      <form action="/admin/administrarLibrosForm/" method="GET">
+        <button type="submit" class="btn btn-primary">Nuevo Libro +</button>
+      </form>
+    </div>
+
+    <div class="row">
+        <% if(libros.length > 0) {%>
+          <% libros.map( libro => { %>
+            <div class="col-12 col-lg-6  col-xl-4 my-1">
+              <div class="card">
+                <img
+                  src="<%= libro.urlImg %>"
+                  class="card-img-top"
+                  alt="..."
+                  width="200"
+                  height="400"
+                />
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <%= libro.nombreLibro %>
+                  </h4>
+                  <p class="card-text">
+                    <small class="text-muted">
+                      Edicion: <%= libro.annoEdicion %>
+                    </small>
+                  </p>
+                  <form action="/admin/administrarLibro/delete/<%=libro.idLibro%>", method="POST">
+                    <button type="submit" class="btn btn-primary">Borrar Libro X</button>
+                  </form>
+                  <form action="/admin/administrarLibrosForm/", method="GET">
+                    <input type="hidden" value="<%=libro.idLibro%>" name="idLibro">
+                    <button type="submit" class="btn btn-primary">Editar Libro</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+    
+          <% }) %>
+        <%} else { %>
+          <h2>No Hay libros disponibles</h2>
+        <%} %>
+    
+      </div>
+</div>
+
+<%- include('../includes/footerPage.ejs') %>

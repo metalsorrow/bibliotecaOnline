@@ -1,0 +1,37 @@
+<%- include('../includes/navBarAdmin.ejs') %>
+
+<div class="container">
+    <%if(msg){%>
+        <div class="alert alert-success" role="alert">
+          <%= text %>
+        </div>
+    <% } %>
+    
+    <div class="row">
+        <form id="form-horizontal" class="row" method="POST" encType="multipart/form-data" action="/admin/administrarLibro/<%if(update){%>update<%}%>" >
+            <!-- Form Name -->
+            <legend>Administra Nuevo Usuario</legend>
+              
+                <input type="text" name="nombreLibro" value="<%if(update){%><%=libro.nombreLibro%><%}%>">
+                <input type="text" name="annoEdicion" value="<%if(update){%><%=libro.annoEdicion%><%}%>">
+                <input type="text" name="nombreAutor" value="<%if(update){%><%=libro.nombreAutor%><%}%>">
+                <select id="tipoUsuario" name="nombreCategoria" class="form-control input-md">
+                    <%categorias.map( categoria => {%>
+                        <option><%=categoria.nombreCategoria%></option>
+                    <%})%>    
+                </select>   
+            
+                <input type="text" name="nombreEditorial" value="<%if(update){%><%=libro.nombreEditorial%><%}%>">
+                <input type="file" name="img">
+                <input type="file" name="pdf">
+                <input type="hidden" name="idLibro" value="<%if(update){%><%=libro.idLibro%><%}%>">
+                <button type="submit"><%if(update){%>Actualizar<%} else {%>Nuevo Libro<%}%></button>
+            
+        </form>
+        <form action="/admin/administrarLibros/">
+            <button type="submit">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<%- include('../includes/footerPage.ejs') %>

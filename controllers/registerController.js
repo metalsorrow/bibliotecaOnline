@@ -40,11 +40,11 @@ module.exports.postLogin = (req, res, next) => {
                             // res.cookie('access_token', token,{
                             //     maxAge: 3600,httpOnly: true
                             // })
-                            return res.status(200).render(`biblioteca/biblioteca${usuario.tipoUsuario}`, {token, libros,login: true})
+                            return res.status(200).render(`biblioteca/biblioteca${usuario.tipoUsuario}`, { libros, message: false })
                         })
                 })
             } else {
-                return res.status(401).render('register/login',{error: true})
+                return res.status(401).render('register/login',{error: true,})
             }
         })
         .catch( err => {
@@ -77,9 +77,6 @@ module.exports.postNewUser = (req, res, next) => {
                     if(err){
                         throw err;
                     }
-
-
-                    
                     Usuario.create({rut, passEncripted, correo, fono, tipoUsuario, nombre, primerApellido, segundoApellido})
                         .then((resdb) =>{
                             return res.send(resdb)

@@ -2,13 +2,17 @@
 
 <%- include('../includes/carousel.ejs') %>
 
-
 <div class="container-fluid">
   <div class="row d-flex justify-content-center my-5">
     <h1 class="display-4 font-weight-bolder animated-pulse">
       biblioteca
     </h1>
   </div>
+	<% if(message){ %>
+		<div class="alert alert-danger" role="alert">
+			<%= messageText %>
+		</div>
+	<% } %>
 
   <div class="row m-3">
     <% if(libros.length > 0) {%>
@@ -51,21 +55,6 @@
 
   </div>
 </div>
-
-
-<!-- <% if(login){%>
-  <script>
-    function fijarSesion(){
-      if(!sessionStorage){
-        sessionStorage.setItem('token', '<%- token %>')
-        console.log(sessionStorage.getItem('token'))
-        
-      }
-    }
-    window.onload = fijarSesion()
-  </script>
-
-<%}%> -->
 
 
 

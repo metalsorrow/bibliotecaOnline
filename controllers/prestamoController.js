@@ -28,7 +28,6 @@ const postNewPrestamo = (req,res) => {
         .then( libro => {
             Usuario.findByPk(usuario.rut)
                 .then( usuario => {
-                    console.log(libro.dataValues)
                     return usuario.addLibro(libro)
                 })
                 .then( resDB => {

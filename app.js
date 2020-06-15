@@ -5,11 +5,14 @@ const bodyParser = require('body-parser')
 const sequalize = require('./database')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const fileUpload = require('express-fileupload')
+
 // Models
 const Libro = require('./models/libro')
 const Categoria = require('./models/categoria')
 const Prestamo = require('./models/prestamo')
 const Usuario = require('./models/usuario')
+
 
 
 
@@ -29,7 +32,7 @@ app.use(session({
     saveUninitialized: true
 }))
 
-
+app.use(fileUpload());
 app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -50,22 +53,12 @@ app.use('/prestamo', prestamosRoutes)
 app.use(notFound404);
 
 
-// Prestamo.belongsTo(Usuario, { constraints: true, onDelete: false})
-// Usuario.hasMany(Prestamo);
 
 Usuario.belongsToMany(Libro, {through: Prestamo, foreignKey: 'rut'})
 Libro.belongsToMany(Usuario, {through: Prestamo, foreignKey: 'idLibro'})
 
 Libro.belongsTo(Categoria, { constraints: true, onDelete: false})
 Categoria.hasMany(Libro);
-
-// Prestamo.belongsTo(Libro, { constraints: true, onDelete: false})
-// Libro.hasMany(Prestamo);
-
-
-
-
-
 
 
 
