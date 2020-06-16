@@ -71,25 +71,22 @@ const viewAdminLibroForm =  (req, res) => {
     })
 }
 
-const deleteLibro = (req,res) => {
+const deleteLibro = async (req,res) => {
     const {idLibro} = req.params;
-    Libro.destroy({
-        where:{
-            idLibro
-        }
-    })
-    .then( resDb => {
-        Libro.findAll()
-        .then( libros => {
-            return res.status(200).render('admin/adminLibro',{libros,msg:true, text:`Libro ${idLibro} Borrado Exitosamente`})
-        })
-        .catch(err => {
-            return res.json({msg:'Error Searching books',err})
-        })
-    })
-    .catch( err => {
+    try {
+        
+        const libro = await Libro.findByPk(idLibro)
+        fs.unlinkSync(`${ROOT}/public/pdf/${libro.urlFile}`)
+        fs.unlinkSync(`${ROOT}/public${libro.urlImg}`)
+
+        await Libro.destroy({ where:{ idLibro } })
+        const libros = await Libro.findAll()
+
+        res.status(200).render('admin/adminLibro',{libros,msg:true, text:`Libro ${idLibro} Borrado Exitosamente`})
+
+    } catch (err) {
         return res.json({msg:'Error Executing delete',err})
-    })
+    }
 }
 
 const postNewLibro = (req, res) => {
